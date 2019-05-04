@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %} Build an ArtistRank Graph {% endblock %}
+{% block header %} ArtistRank {% endblock %}
+{% block page_content %}
+    <div class="ui three column stackable grid">
+        <div class="three wide column"></div>
+            <div class="ten wide column">
+                <div class="row">
+                    <h3 class="first" style="margin-top: 2em">Build an ArtistRank Graph</h3>
+                    <p>This is some text explaining what the point of this project is and what it represents yada yada yada.
+                        This is some text explaining what the point of this project is and what it represents yada yada yada.
+                        This is some text explaining what the point of this project is and what it represents yada yada yada.</p>
+                </div>
+                <br>
+                <div class="row">
+                    <form class="ui form" id="load-form" method="post">
+                        {{ form.csrf_token }}
+                        <div class="ui field" style="margin-bottom: .25em">
+                            <label for="search_artist"> {{ form.search_artist.label }} </label>
+                            <div id="search_field"> {{ form.search_artist }} </div>
+                        </div>
+                        <button class="ui button fluid" id="submit-button" type="submit">Search</button>
+                    </form>
+                    <script>
+                        $('#submit-button').click(function () {
+                            console.log('click')
+                            var field_content = $("#search_field").text()
+                            console.log(field_content)
+                            if (field_content.length > 0) {
+                                $('#load-form').addClass("loading");
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        <div class="three wide column"></div>
+    </div>
+{% endblock %}
+<div class="ui form">
+  <div class="inline fields">
+    <div class="eight wide field">
+      <label>Name</label>
+      <input type="text" placeholder="First Name">
+    </div>
+    <div class="three wide field">
+      <input type="text" placeholder="Middle Name">
+    </div>
+    <div class="five wide field">
+      <input type="text" placeholder="Last Name">
+    </div>
+  </div>
+</div>

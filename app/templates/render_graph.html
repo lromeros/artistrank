@@ -1,0 +1,56 @@
+{% extends "base_graph.html" %}
+{% block title %} ArtistRank Graph {% endblock %}
+{% block header %} ArtistRank Graph {% endblock %}
+{% block graph_summary %}
+    <p>This is a visualization of the network of artists related to <b>{{ root_node.name }}</b>.
+        Each node represents an artist, and the node size is a function of that artist's calculated PageRank--
+        the bigger the node, the higher the PageRank. The artist with the highest PageRank is
+        <b>{{ max_artist.name }}</b>, with a total of <e>{{ max_artist_edges }}</e> edges,
+        while the artist with the lowest PageRank is <b>{{ min_artist.name }}</b>, with a total of
+        <e>{{ min_artist_edges }}</e>
+        {% if min_artist_edges > 1 %}
+            edges.
+        {% else %}
+            edge.
+        {% endif %}
+    </p>
+    <div class="ui centered card">
+        <div class="image">
+            <img src={{ max_artist.img_href }}>
+        </div>
+        <div class="content">
+            <a class="header">{{ max_artist.name }}</a>
+        </div>
+    </div>
+
+    <div class="ui centered card">
+        <div class="image">
+            <img src={{ min_artist.img_href }}>
+        </div>
+        <div class="content">
+            <a class="header">{{ min_artist.name }}</a>
+        </div>
+    </div>
+{% endblock %}
+{% block sigma_graph %}
+    <div id="sigma-container"></div>
+    <script src="./static/plugins/sigma.layout.forceAtlas2.min.js"></script>
+    <script>
+        var s = new sigma(
+            {
+                renderer: {
+                    container: document.getElementById('sigma-container'),
+                    type: 'canvas'
+                }
+            }
+        );
+
+        s.graph.read({{ artist_graph | safe }});
+        s.refresh();
+        s.startForceAtlas2();
+        window.setTimeout(function () {
+            s.killForceAtlas2()
+        }, 10000);
+    </script>
+{% endblock %}
+

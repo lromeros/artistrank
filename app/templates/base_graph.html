@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} ArtistRank Graph {% endblock %}
+{% block header %} ArtistRank Graph {% endblock %}
+{% block page_content %}
+    <div class="ui stackable two column centered grid" style="height: 95%">
+        <div class="three column row">
+            <div class="one wide column">
+            </div>
+            <div class="five wide column scrollable">
+                {% block graph_summary %}{% endblock %}
+            </div>
+            <div class="ten wide column">
+                {% block sigma_graph %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class="ui centered grid">
+        <div class="ten wide column">
+            {% block graph_description %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
