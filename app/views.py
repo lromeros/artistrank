@@ -9,6 +9,7 @@ from app.forms import SearchArtistForm
 @app.route("/", methods=["GET", "POST"])
 def index():
     form = SearchArtistForm()
+
     if form.validate_on_submit():
         graph_dict = generate_graph(form.search_artist.data)
         root_node = graph_dict.get("root_node")
