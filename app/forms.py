@@ -4,4 +4,5 @@ from wtforms.validators import DataRequired
 
 
 class SearchArtistForm(FlaskForm):
-    search_artist = StringField('Search Artist', validators=[DataRequired()])
+    """"A FlaskForm representing the initial artist search interaction."""
+    search_artist = StringField("Search Artist", validators=[DataRequired()])
