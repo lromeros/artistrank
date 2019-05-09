@@ -1,7 +1,14 @@
 {% extends "base.html" %}
-{% block title %} ArtistRank Graph {% endblock %}
-{% block header %} ArtistRank Graph {% endblock %}
+{% block title %}ArtistRank Graph{% endblock %}
+{% block header %}ArtistRank Graph{% endblock %}
 {% block page_content %}
+    <div class="ui container graph_intro">
+        <strong>Here's the graph generated from your artist!</strong><br><br>In this visualization, the bigger the node, the higher the
+        PageRank value calculated. This graph also highlights the different clusters of artists that can exist in a
+        network of related artists and lets you visualize the overlap and distinctions between artist sub-genres!
+        Sometimes you'll find that separate clusters are connected by only a single artist!<br><br>Click around and see what
+        you can find.
+    </div>
     <div class="ui stackable two column centered grid" style="height: 95%">
         <div class="three column row">
             <div class="one wide column">
@@ -21,15 +28,17 @@
     </div>
 {% endblock %}
 
-{% macro artist_card(artist) %}
+{% macro artist_card(title, artist, edges) %}
     <div class="ui centered card">
         <div class="image">
             <img src={{ artist.img_href }}>
         </div>
         <div class="content">
-            <a class="header">{{ artist.name }}</a>
+            <a class="header">{{ title }} - {{ artist.name }}</a>
             <div class="meta">
-                <span>Popularity: {{ artist.popularity }}. <br> PageRank: {{ artist.page_rank * 100 }}.</span>
+                <span><strong>PageRank: </strong>{{ artist.page_rank * 100 }}</span>
+                <br>
+                <span><strong>Edges: </strong>{{ edges }}</span>
             </div>
             <div class="description">
                 {{ artist.genres }}

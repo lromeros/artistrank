@@ -10,6 +10,11 @@ html, body {
     background-color: rgba(249, 248, 248, 1);
 }
 
+.graph_intro {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 .page-title {
     margin: .25em .25em .25em 3em !important;
 }

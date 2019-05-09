@@ -6,6 +6,7 @@ import config
 
 class SpotifyAPI:
     """A class representing a single session/connectio"""
+
     def __init__(self) -> None:
         """ """
         self.token: str = self.authorize_request()
@@ -34,10 +35,17 @@ class SpotifyAPI:
         :return Tuple: information for artist given as (id:String, name:String, popularity:int)
                        or (None, None, None, None, None) if artist not valid TODO
         """
-        search_params = {"q": artist_name, "type": "artist", "market": "US", "limit": "1"}
+        search_params = {
+            "q": artist_name,
+            "type": "artist",
+            "market": "US",
+            "limit": "1",
+        }
         search_headers = {"Authorization": "Bearer {}".format(self.token)}
         response = requests.get(
-            "https://api.spotify.com/v1/search", headers=search_headers, params=search_params
+            "https://api.spotify.com/v1/search",
+            headers=search_headers,
+            params=search_params,
         )
 
         if response.json().get("artists"):

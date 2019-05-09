@@ -1,21 +1,9 @@
 {% extends "base_graph.html" %}
-{% block title %} ArtistRank Graph {% endblock %}
-{% block header %} ArtistRank Graph {% endblock %}
+{% block title %}ArtistRank Graph{% endblock %}
+{% block header %}{{ root_node.name }}'s ArtistRank Graph{% endblock %}
 {% block graph_summary %}
-    <p>This is a visualization of the network of artists related to <b>{{ root_node.name }}</b>.
-        Each node represents an artist, and the node size is a function of that artist's calculated PageRank--
-        the bigger the node, the higher the PageRank. The artist with the highest PageRank is
-        <b>{{ max_artist.name }}</b>, with a total of <e>{{ max_artist_edges }}</e> edges,
-        while the artist with the lowest PageRank is <b>{{ min_artist.name }}</b>, with a total of
-        <e>{{ min_artist_edges }}</e>
-        {% if min_artist_edges > 1 %}
-            edges.
-        {% else %}
-            edge.
-        {% endif %}
-    </p>
-    {{ artist_card(max_artist) }}
-    {{ artist_card(min_artist) }}
+    {{ artist_card('Highest PageRank', max_artist, max_artist_edges) }}
+    {{ artist_card('Lowest PageRank', min_artist, min_artist_edges) }}
 {% endblock %}
 {% block sigma_graph %}
     <div id="sigma-container"></div>

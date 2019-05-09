@@ -166,7 +166,15 @@ class ArtistNode:
         page_rank_val = (1 - d_factor) + d_factor * self._in_artists_page_rank()
         self.page_rank = page_rank_val
 
-    def to_json(self, min_pr: int, max_pr: int):
+    def _get_relative_size(self, min_pr: float, max_pr: float) -> float:
+        """ Generates a size value for this ArtistNode's visual representation, based on its
+        PageRank value and how close it is to the maximum and minimum PageRank values in this graph,
+        as well as on its popularity value.
+
+        :param int min_pr: the minimum PageRank value that exists in this ArtistNode's ArtistGraph
+        :param int max_pr :the maximum PageRank value that exists in this ArtistNode's ArtistGraph
+        :return float relative_size:
+        """
         min_px = 10
         max_px = 50
 
@@ -174,17 +182,26 @@ class ArtistNode:
             (self.page_rank * (min_px - max_px) + (min_pr * max_px) - (min_px * max_pr))
             / (min_pr - max_pr)
         )
+
+        return ((100 - pr_relative_size) * 0.7) + (self.popularity * 0.3)
+
+    def to_json(self, min_pr: float, max_pr: float):
+        size = self._get_relative_size(min_pr, max_pr)
         return {
             "id": self.aid,
             "label": self.name,
             "x": random.randint(1, 10),
             "y": random.randint(1, 10),
-            "size": (100 - pr_relative_size) * self.popularity,
+            "size": size,
             "color": "#EE651D",
         }
 
     def _add_json_edge(self, target_id: str):
-        edge_dict = {"id": self.aid + target_id, "source": self.aid, "target": target_id}
+        edge_dict = {
+            "id": self.aid + target_id,
+            "source": self.aid,
+            "target": target_id,
+        }
         self.json_edges.append(edge_dict)
 
     @staticmethod

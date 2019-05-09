@@ -9,7 +9,9 @@ def generate_graph(artist_name: str):
     if spot_api.token is not None:
         artist_json = spot_api.verify_valid_artist(artist_name)
         if len(artist_json.values()) > 0:
-            artist_graph = ArtistGraph(ArtistNode.create_artist_node_from_json(artist_json))
+            artist_graph = ArtistGraph(
+                ArtistNode.create_artist_node_from_json(artist_json)
+            )
             artist_graph.populate(spot_api.get_related_artists)
             artist_graph.run_page_rank(150, 0.85)
             return {
