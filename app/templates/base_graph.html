@@ -20,3 +20,20 @@
         </div>
     </div>
 {% endblock %}
+
+{% macro artist_card(artist) %}
+    <div class="ui centered card">
+        <div class="image">
+            <img src={{ artist.img_href }}>
+        </div>
+        <div class="content">
+            <a class="header">{{ artist.name }}</a>
+            <div class="meta">
+                <span>Popularity: {{ artist.popularity }}. <br> PageRank: {{ artist.page_rank * 100 }}.</span>
+            </div>
+            <div class="description">
+                {{ artist.genres }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}

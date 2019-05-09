@@ -14,23 +14,8 @@
             edge.
         {% endif %}
     </p>
-    <div class="ui centered card">
-        <div class="image">
-            <img src={{ max_artist.img_href }}>
-        </div>
-        <div class="content">
-            <a class="header">{{ max_artist.name }}</a>
-        </div>
-    </div>
-
-    <div class="ui centered card">
-        <div class="image">
-            <img src={{ min_artist.img_href }}>
-        </div>
-        <div class="content">
-            <a class="header">{{ min_artist.name }}</a>
-        </div>
-    </div>
+    {{ artist_card(max_artist) }}
+    {{ artist_card(min_artist) }}
 {% endblock %}
 {% block sigma_graph %}
     <div id="sigma-container"></div>

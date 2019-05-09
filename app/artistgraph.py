@@ -179,7 +179,7 @@ class ArtistNode:
             "label": self.name,
             "x": random.randint(1, 10),
             "y": random.randint(1, 10),
-            "size": 100 - pr_relative_size,
+            "size": (100 - pr_relative_size) * self.popularity,
             "color": "#EE651D",
         }
 
@@ -194,10 +194,12 @@ class ArtistNode:
         else:
             img_href = "https://via.placeholder.com/450"
 
+        genres_str = ", ".join(artist_array.get("genres"))
+
         return ArtistNode(
             artist_array.get("id"),
             artist_array.get("name"),
-            artist_array.get("genres"),
+            genres_str.title(),
             img_href,
             artist_array.get("popularity"),
         )
